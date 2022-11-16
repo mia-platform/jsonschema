@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/invopop/jsonschema/test-user",
+  "$id": "https://github.com/mia-platform/jsonschema/test-user",
   "$ref": "#/$defs/TestUser",
   "$defs": {
     "Bytes": {
@@ -61,10 +61,8 @@
           "description": "list of IDs, omitted when empty"
         },
         "tags": {
-          "patternProperties": {
-            ".*": {
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           },
           "type": "object"
         },

@@ -1,13 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/invopop/jsonschema/examples/user",
+  "$id": "https://github.com/mia-platform/jsonschema/examples/user",
   "$ref": "#/$defs/User",
   "$defs": {
     "NamedPets": {
-      "patternProperties": {
-        ".*": {
-          "$ref": "#/$defs/Pet"
-        }
+      "additionalProperties": {
+        "$ref": "#/$defs/Pet"
       },
       "type": "object",
       "description": "NamedPets is a map of animal names to pets."

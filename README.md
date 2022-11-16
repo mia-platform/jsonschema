@@ -1,10 +1,10 @@
 # Go JSON Schema Reflection
 
-[![Lint](https://github.com/invopop/jsonschema/actions/workflows/lint.yaml/badge.svg)](https://github.com/invopop/jsonschema/actions/workflows/lint.yaml)
-[![Test Go](https://github.com/invopop/jsonschema/actions/workflows/test.yaml/badge.svg)](https://github.com/invopop/jsonschema/actions/workflows/test.yaml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/invopop/jsonschema)](https://goreportcard.com/report/github.com/invopop/jsonschema)
-[![GoDoc](https://godoc.org/github.com/invopop/jsonschema?status.svg)](https://godoc.org/github.com/invopop/jsonschema)
-![Latest Tag](https://img.shields.io/github/v/tag/invopop/jsonschema)
+[![Lint](https://github.com/mia-platform/jsonschema/actions/workflows/lint.yaml/badge.svg)](https://github.com/mia-platform/jsonschema/actions/workflows/lint.yaml)
+[![Test Go](https://github.com/mia-platform/jsonschema/actions/workflows/test.yaml/badge.svg)](https://github.com/mia-platform/jsonschema/actions/workflows/test.yaml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mia-platform/jsonschema)](https://goreportcard.com/report/github.com/mia-platform/jsonschema)
+[![GoDoc](https://godoc.org/github.com/mia-platform/jsonschema?status.svg)](https://godoc.org/github.com/mia-platform/jsonschema)
+![Latest Tag](https://img.shields.io/github/v/tag/mia-platform/jsonschema)
 
 This package can be used to generate [JSON Schemas](http://json-schema.org/latest/json-schema-validation.html) from Go types through reflection.
 
@@ -13,12 +13,13 @@ This package can be used to generate [JSON Schemas](http://json-schema.org/lates
 - Supports simple string and numeric enums.
 - Supports custom property fields via the `jsonschema_extras` struct tag.
 
-This repository is a fork of the original [jsonschema](https://github.com/alecthomas/jsonschema) by [@alecthomas](https://github.com/alecthomas). At [Invopop](https://invopop.com) we use jsonschema as a cornerstone in our [GOBL library](https://github.com/invopop/gobl), and wanted to be able to continue building and adding features without taking up Alec's time. There have been a few significant changes that probably mean this version is a not compatible with with Alec's:
+This repository is a fork of the original [jsonschema](https://github.com/alecthomas/jsonschema) by [@alecthomas](https://github.com/alecthomas).  
+There have been a few significant changes that probably mean this version is a not compatible with with Alec's:
 
 - The original was stuck on the draft-04 version of JSON Schema, we've now moved to the latest JSON Schema Draft 2020-12.
 - Schema IDs are added automatically from the current Go package's URL in order to be unique, and can be disabled with the `Anonymous` option.
 - Support for the `FullyQualifyTypeName` option has been removed. If you have conflicts, you should use multiple schema files with different IDs, set the `DoNotReference` option to true to hide definitions completely, or add your own naming strategy using the `Namer` property.
-- Support for `yaml` tags and related options has been dropped for the sake of simplification. There were a [few inconsistencies](https://github.com/invopop/jsonschema/pull/21) around this that have now been fixed.
+- Support for `yaml` tags and related options has been dropped for the sake of simplification.
 
 ## Versions
 
@@ -118,9 +119,7 @@ jsonschema.Reflect(&TestUser{})
 
 ## YAML
 
-Support for `yaml` tags has now been removed. If you feel very strongly about this, we've opened a discussion to hear your comments: https://github.com/invopop/jsonschema/discussions/28
-
-The recommended approach if you need to deal with YAML data is to first convert to JSON. The [invopop/yaml](https://github.com/invopop/yaml) library will make this trivial.
+Support for `yaml` tags has now been removed. The recommended approach if you need to deal with YAML data is to first convert to JSON.
 
 ## Configurable behaviour
 
@@ -208,7 +207,7 @@ To get the comments provided into your JSON schema, use a regular `Reflector` an
 
 ```go
 r := new(Reflector)
-if err := r.AddGoComments("github.com/invopop/jsonschema", "./"); err != nil {
+if err := r.AddGoComments("github.com/mia-platform/jsonschema", "./"); err != nil {
   // deal with error
 }
 s := r.Reflect(&User{})

@@ -140,9 +140,7 @@ func ReflectFromType(t reflect.Type) *Schema {
 // A Reflector reflects values into a Schema.
 type Reflector struct {
 	// BaseSchemaID defines the URI that will be used as a base to determine Schema
-	// IDs for models. For example, a base Schema ID of `https://invopop.com/schemas`
-	// when defined with a struct called `User{}`, will result in a schema with an
-	// ID set to `https://invopop.com/schemas/user`.
+	// IDs for models.
 	//
 	// If no `BaseSchemaID` is provided, we'll take the type's complete package path
 	// and use that as a base instead. Set `Anonymous` to try if you do not want to
@@ -215,11 +213,11 @@ type Reflector struct {
 	//
 	// Type descriptions should be defined like:
 	//
-	//   map[string]string{"github.com/invopop/jsonschema.Reflector": "A Reflector reflects values into a Schema."}
+	//   map[string]string{"github.com/mia-platform/jsonschema.Reflector": "A Reflector reflects values into a Schema."}
 	//
 	// And Fields defined as:
 	//
-	//   map[string]string{"github.com/invopop/jsonschema.Reflector.DoNotReference": "Do not reference definitions."}
+	//   map[string]string{"github.com/mia-platform/jsonschema.Reflector.DoNotReference": "Do not reference definitions."}
 	//
 	// See also: AddGoComments
 	CommentMap map[string]string
@@ -485,10 +483,9 @@ func (r *Reflector) reflectMap(definitions Definitions, t reflect.Type, st *Sche
 		st.AdditionalProperties = FalseSchema
 		return
 	}
+
 	if t.Elem().Kind() != reflect.Interface {
-		st.PatternProperties = map[string]*Schema{
-			".*": r.refOrReflectTypeToSchema(definitions, t.Elem()),
-		}
+		st.AdditionalProperties = r.refOrReflectTypeToSchema(definitions, t.Elem())
 	}
 }
 
@@ -513,7 +510,7 @@ func (r *Reflector) reflectStruct(definitions Definitions, t reflect.Type, s *Sc
 	if r.AssignAnchor {
 		s.Anchor = t.Name()
 	}
-	if !r.AllowAdditionalProperties {
+	if !r.AllowAdditionalProperties && s.AdditionalProperties == nil {
 		s.AdditionalProperties = FalseSchema
 	}
 
