@@ -475,6 +475,15 @@ func (r *Reflector) reflectMap(definitions Definitions, t reflect.Type, st *Sche
 		st.Description = r.lookupComment(t, "")
 	}
 
+	switch t.Key().Kind() {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		st.PatternProperties = map[string]*Schema{
+			"^[0-9]+$": r.refOrReflectTypeToSchema(definitions, t.Elem()),
+		}
+		st.AdditionalProperties = FalseSchema
+		return
+	}
+
 	if t.Elem().Kind() != reflect.Interface {
 		st.AdditionalProperties = r.refOrReflectTypeToSchema(definitions, t.Elem())
 	}
