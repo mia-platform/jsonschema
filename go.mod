@@ -1,4 +1,4 @@
-module github.com/invopop/jsonschema
+module github.com/mia-platform/jsonschema
 
 go 1.16
 
