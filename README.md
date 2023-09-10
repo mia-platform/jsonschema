@@ -1,3 +1,5 @@
+> ⚠️ Since [original jsonschema lib](https://github.com/invopop/jsonschema) now manage the additionalProperties field, we archive this repo. Please, use the original lib instead.
+
 # Go JSON Schema Reflection
 
 [![Lint](https://github.com/mia-platform/jsonschema/actions/workflows/lint.yaml/badge.svg)](https://github.com/mia-platform/jsonschema/actions/workflows/lint.yaml)
